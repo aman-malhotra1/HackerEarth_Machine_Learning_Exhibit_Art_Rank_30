@@ -1,6 +1,6 @@
 # HackerEarth_Machine_Learning_Exhibit_Art_Rank_30
 
-# Private Leaderboard Rank -> 30
+### Private Leaderboard Rank -> 30
 
 Problem_statement ->
 
