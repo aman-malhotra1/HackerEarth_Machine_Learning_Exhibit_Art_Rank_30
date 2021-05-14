@@ -11,4 +11,4 @@ Problem Statement and DataSet Link -> https://www.hackerearth.com/problem/machin
 
 Leaderboard Link -> https://www.hackerearth.com/challenges/competitive/hackerearth-machine-learning-challenge-predict-shipping-cost/leaderboard/predict-the-cost-to-ship-the-sculptures-12-e7728f5d/
 
-
+Shipping Charges Prediction App Link -> https://predict-shipping-cost.herokuapp.com/
