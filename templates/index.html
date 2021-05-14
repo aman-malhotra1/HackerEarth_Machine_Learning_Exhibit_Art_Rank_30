@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Predict Sclupture Shipping Cost</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="C:\Users\babit\OneDrive\Desktop\Competitions\HackerEarth_Machine_Learning_Predict the_Shipping_Cost\datepicker\js\bootstrap-datepicker.js"></script>
+
+<style>
+body {
+ background-color: white;
+}
+</style>
+
+
+</head>
+<body>
+    <div class="container-fluid">
+    <form id="form_id" action="/get_prediction" method="post">
+        <h1 style="text-align : center">Predict the cost to ship the sculptures</h1>
+        <div class="form-group">
+            <label>Customer-Information :</label>
+            <select name="customer_info" id="customer_info" class="form-control">
+                {% for info in customer_info %}
+                <option value="{{info}}">{{info}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Express Shipment :</label>
+            <select id = 'express' name="express" class="form-control">
+                {%for exp in express%}
+                <option value="{{exp}}">{{exp}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Fragile :</label>
+            <select id = 'fragile' name="fragile" class="form-control">
+                {%for i in fragile%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Installation Included :</label>
+            <select id = 'installation' name="installation" class="form-control">
+                {%for i in installation%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>International :</label>
+            <select id = 'international' name="international" class="form-control">
+                {%for i in international%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Material :</label>
+            <select id = 'material' name="material" class="form-control">
+                {%for i in material%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Remote Location :</label>
+            <select id = 'remote' name="remote" class="form-control">
+                {%for i in remote%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="'form-group">
+            <label>Transport :</label>
+            <select id = 'transport' name="transport" class="form-control">
+                {%for i in transport%}
+                <option value="{{i}}">{{i}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Artist Reputation Score: </label>
+            <input placeholder="Enter value from 0 to 1" class="form-control" required type="number" min="0" max="1" step="any" id =score name="score">
+        </div>
+
+        <div class="form-group">
+            <label>Base Shipping Price :</label>
+            <input placeholder="Enter Value from 10 to 100" class="form-control" required type="number" min="10" max="100" step="any" id="base_price" name="base_price">
+        </div>
+
+        <div class="form-group">
+            <label>Price of Sculpture :</label>
+            <input placeholder="Enter Price of Sculpture" class="form-control" required type="number" min="1" step="any" id="price" name="price">
+        </div>
+
+        <div class="form-group">
+            <label>Height of Sculpture :</label>
+            <input placeholder="Enter Value from 1 to 80" class="form-control" required type="number" min="1" max="80" step="any" id="height" name="height">
+        </div>
+
+        <div class="form-group">
+            <label>Width of Sculpture :</label>
+            <input placeholder="Enter Value from 1 to 60" class="form-control" required type="number" min="1" max="60" step="any" id="width" name="width">
+        </div>
+
+        <div class="form-group">
+            <label>Weight of Sculpture :</label>
+            <input placeholder="Enter Weight of Sculpture" class="form-control" required type="number" min="1"  step="any" id="weight" name="weight">
+        </div>
+
+        <div class="form-group">
+            <label>Select Schedule Date</label>
+            <input type="date" name="schedule_date" id="schedule_date" placeholder="Select Schedule Date" class="form-control datepicker">
+        </div>
+
+        <div class="form-group">
+            <label>Select Delivery Date</label>
+            <input type="date" name="delivery_date" id="delivery_date" placeholder="Select Delivery Date" class="form-control datepicker">
+        </div>
+        <input type="hidden" id="prediction" value="{{prediction}}">
+
+        <button id ="mybutton" type="submit" class="btn btn-success">Get Shipping Price</button>
+    </form>
+    </div>
+</body>
+
+<script>
+    $(document).ready(function(){
+        $('#form_id').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action')
+        $.ajax({
+            type : 'POST',
+            url : url,
+            data : $(this).serialize(),
+            dataType : 'HTML',
+            success : function(response){
+                var prediction = $('<div/>').append(response).find('#prediction').val();
+                alert("Shipping Charges :"+prediction)
+            }
+        });
+        });
+    });
+</script>
